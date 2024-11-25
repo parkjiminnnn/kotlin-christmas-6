@@ -3,8 +3,6 @@ package christmas.controller
 import christmas.domain.Calendar
 import christmas.domain.Customer
 import christmas.domain.Pay
-import christmas.utils.Validate.validateOrders
-import christmas.utils.Validate.validateReserveDate
 import christmas.view.InputView
 import christmas.view.OutputView
 
@@ -37,7 +35,6 @@ class RestaurantController {
         while (true) {
             try {
                 val reserveDate = inputView.inputExceptedDayMessage()
-                validateReserveDate(reserveDate)
                 return Calendar(reserveDate)
             } catch (e: IllegalArgumentException) {
                 println(e)
@@ -49,7 +46,6 @@ class RestaurantController {
         while (true) {
             try {
                 val rawOrders = inputView.inputOrderMessage()
-                validateOrders(rawOrders)
                 return Customer(rawOrders)
             } catch (e: IllegalArgumentException) {
                 println(e)
