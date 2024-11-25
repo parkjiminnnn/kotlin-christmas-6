@@ -36,14 +36,28 @@ class OutputView {
     ) {
         println("<혜택 내역>")
         if (christmasDiscount != 0) println("크리스마스 디데이 할인: ${christmasDiscount}원")
+        weekDiscount(weekdayDiscount, weekendDiscount)
+        if (specialDiscount != 0) println("특별 할인: ${specialDiscount}원")
+        if (freeEventDiscount != 0) println("증정 이벤트: ${freeEventDiscount}원") else println("없음")
+        isDiscount(christmasDiscount, weekdayDiscount, weekendDiscount, specialDiscount, freeEventDiscount)
+    }
+
+    private fun weekDiscount(weekdayDiscount: Int, weekendDiscount: Int) {
         if (weekdayDiscount != 0) println("평일 할인: ${weekdayDiscount}원")
         if (weekendDiscount != 0) println("주말 할인:${weekendDiscount}원")
-        if (specialDiscount != 0) println("특별 할인: ${specialDiscount}원")
-        if (freeEventDiscount == 0) println("없음") else println("증정 이벤트: -25000원")
+    }
+
+    private fun isDiscount(
+        christmasDiscount: Int,
+        weekdayDiscount: Int,
+        weekendDiscount: Int,
+        specialDiscount: Int,
+        freeEventDiscount: Int
+    ) {
         if (christmasDiscount != 0 && weekdayDiscount != 0 && weekendDiscount != 0 &&
             specialDiscount != 0 && freeEventDiscount == 0
         ) println("0원")
-            println()
+        println()
     }
 
     private fun printTotalDiscount(totalDiscount: Int) {
