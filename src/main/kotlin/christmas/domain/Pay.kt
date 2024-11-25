@@ -11,14 +11,14 @@ class Pay(private val calendar: Calendar, private val customer: Customer) {
         return 0
     }
 
-     fun weekendDiscount(): Int {
+    fun weekendDiscount(): Int {
         val mainQuantitySum = customer.orders.filter { order ->
             matchedMenuBoard.any { menuBoard ->
                 menuBoard.menuType == "메인" && menuBoard.menuName == order.menuName
             }
         }.sumOf { it.quantity }
         if (calendar.isWeekend()) {
-            return -(mainQuantitySum * 2023)
+            return -mainQuantitySum * 2023
         }
         return 0
     }
@@ -30,7 +30,7 @@ class Pay(private val calendar: Calendar, private val customer: Customer) {
             }
         }.sumOf { it.quantity }
         if (!calendar.isWeekend()) {
-            return -(dessertQuantitySum * 2023)
+            return -dessertQuantitySum * 2023
         }
         return 0
     }
