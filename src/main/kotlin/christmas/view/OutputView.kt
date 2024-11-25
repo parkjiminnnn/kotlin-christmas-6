@@ -3,11 +3,11 @@ package christmas.view
 import christmas.dto.MenuDto
 
 class OutputView {
-    private fun discountPreviewMessage(reserveDate: Int) {
+    fun discountPreviewMessage(reserveDate: Int) {
         println("12월 ${reserveDate}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n")
     }
 
-    private fun printOrders(orders: List<MenuDto>) {
+    fun printOrders(orders: List<MenuDto>) {
         println("<주문 메뉴>")
         orders.forEach { menuDto ->
             println(menuDto.toString())
@@ -15,19 +15,19 @@ class OutputView {
         println()
     }
 
-    private fun printBeforeDiscountPrice(beforeDiscountPrice: Int) {
+    fun printBeforeDiscountPrice(beforeDiscountPrice: Int) {
         println("<할인 전 총주문 금액>")
         println("${beforeDiscountPrice}원\n")
     }
 
-    private fun printFreeMenu(beforeDiscountPrice: Int) {
+    fun printFreeMenu(beforeDiscountPrice: Int) {
         println("<증정 메뉴>")
         if (beforeDiscountPrice >= 120000) return println("샴페인 1개\n")
         return println("없음\n")
 
     }
 
-    private fun printDiscount(
+    fun printDiscount(
         christmasDiscount: Int,
         weekdayDiscount: Int,
         weekendDiscount: Int,
@@ -60,41 +60,18 @@ class OutputView {
         println()
     }
 
-    private fun printTotalDiscount(totalDiscount: Int) {
+    fun printTotalDiscount(totalDiscount: Int) {
         println("<총혜택 금액>")
         println("${totalDiscount}원\n")
     }
 
-    private fun printAfterDiscountPrice(afterDiscountPrice: Int) {
+    fun printAfterDiscountPrice(afterDiscountPrice: Int) {
         println("<할인 후 예상 결제 금액>")
         println("${afterDiscountPrice}원\n")
     }
 
-    private fun printEventBatch(batch: String) {
+    fun printEventBatch(batch: String) {
         println("<12월 이벤트 배지>")
         println(batch)
-    }
-
-    fun printTotalResult(
-        reserveDate: Int,
-        orders: List<MenuDto>,
-        beforeDiscountPrice: Int,
-        christmasDiscount: Int,
-        weekdayDiscount: Int,
-        weekendDiscount: Int,
-        specialDiscount: Int,
-        freeEventDiscount: Int,
-        totalDiscount: Int,
-        afterDiscountPrice: Int,
-        batch: String
-    ) {
-        discountPreviewMessage(reserveDate)
-        printOrders(orders)
-        printBeforeDiscountPrice(beforeDiscountPrice)
-        printFreeMenu(beforeDiscountPrice)
-        printDiscount(christmasDiscount, weekdayDiscount, weekendDiscount, specialDiscount, freeEventDiscount)
-        printTotalDiscount(totalDiscount)
-        printAfterDiscountPrice(afterDiscountPrice)
-        printEventBatch(batch)
     }
 }

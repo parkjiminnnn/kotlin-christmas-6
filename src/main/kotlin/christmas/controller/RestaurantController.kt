@@ -12,23 +12,51 @@ class RestaurantController {
     fun run() {
         inputView.helloMessage()
         val calendar = inputReserveDate()
-
         val customer = inputOrders()
-
         val pay = Pay(calendar, customer)
-        outputView.printTotalResult(
-            reserveDate = calendar.reserveDate,
-            orders = customer.orders,
-            beforeDiscountPrice = pay.beforeDiscountPrice(),
-            christmasDiscount = pay.christmasDisCount(),
-            weekdayDiscount = pay.weekDayDiscount(),
-            weekendDiscount = pay.weekendDiscount(),
-            specialDiscount = pay.specialDiscount(),
-            totalDiscount = pay.totalDisCount(),
-            afterDiscountPrice = pay.afterDiscountPrice(),
-            batch = pay.getBatch(),
-            freeEventDiscount = pay.freeEventDiscount()
+
+        displayResult(calendar, customer, pay)
+    }
+
+    private fun displayResult(calendar: Calendar, customer: Customer, pay: Pay) {
+        printDiscountPreview(calendar)
+        printOrderDetails(customer)
+        printPriceDetails(pay)
+        printDiscountDetails(pay)
+        printSummary(pay)
+    }
+
+    private fun printDiscountPreview(calendar: Calendar) {
+        outputView.discountPreviewMessage(calendar.reserveDate)
+    }
+
+    private fun printOrderDetails(customer: Customer) {
+        outputView.printOrders(customer.orders)
+    }
+
+    private fun printPriceDetails(pay: Pay) {
+        val beforeDiscountPrice = pay.beforeDiscountPrice()
+        outputView.printBeforeDiscountPrice(beforeDiscountPrice)
+        outputView.printFreeMenu(beforeDiscountPrice)
+    }
+
+    private fun printDiscountDetails(pay: Pay) {
+        val christmasDiscount = pay.christmasDisCount()
+        val weekdayDiscount = pay.weekDayDiscount()
+        val weekendDiscount = pay.weekendDiscount()
+        val specialDiscount = pay.specialDiscount()
+        val freeEventDiscount = pay.freeEventDiscount()
+
+        outputView.printDiscount(
+            christmasDiscount, weekdayDiscount,
+            weekendDiscount, specialDiscount, freeEventDiscount
         )
+    }
+
+    private fun printSummary(pay: Pay) {
+        outputView.printTotalDiscount(pay.totalDisCount())
+        outputView.printAfterDiscountPrice(pay.afterDiscountPrice())
+        outputView.printEventBatch(pay.getBatch())
     }
 
     private fun inputReserveDate(): Calendar {
