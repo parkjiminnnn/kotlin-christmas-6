@@ -1,6 +1,6 @@
 package christmas.domain
 
-enum class MenuBoard(menuType: String, menuName: String, price: Int) {
+enum class MenuBoard(val menuType: String,val menuName: String, val price: Int) {
     MUSHROOMSOUP("에피타이저", "양송이수프", 6000),
     TAPAS("에피타이저", "타파스", 5500),
     CAESARSALAD("에피타이저", "시저샐러드", 8000),
