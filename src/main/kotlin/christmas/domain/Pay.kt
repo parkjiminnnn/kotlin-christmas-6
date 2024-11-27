@@ -69,7 +69,7 @@ class Pay(private val calendar: Calendar, private val customer: Customer) {
     }
 
     fun afterDiscountPrice(): Int {
-        return beforeDiscountPrice() + totalDisCount()
+        return beforeDiscountPrice() + totalDisCount() - freeEventDiscount()
 
     }
 }
